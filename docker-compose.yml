@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: "3.7"
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27018:27017
+
+  backend:
+    build: ./backend
+    hostname: backend
+    depends_on:
+      - mongo
+    links:
+      - mongo
+    ports:
+      - 80:80
+    environment:
+      PORT: 80
+      IP: 0.0.0.0
+      DOCKER_DB: mongo
+      DOCKER_DB_NAME: app
+
+  frontend:
+    build: ./frontend
+    hostname: frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    links:
+      - backend
