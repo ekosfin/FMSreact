@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
     if (err) return res.status(500);
 
     // test a matching password
-    user.comparePassword(req.body.username, (err2, isMatch) => {
+    user.comparePassword(req.body.username, async (err2, isMatch) => {
       if (err2) return res.status(401);
       if (isMatch) {
         let accessToken = generateAccessToken(user);
@@ -24,10 +24,11 @@ router.post("/", async (req, res) => {
           token: refreshToken,
         });
         await newRefreshToken.save((err3) => {
-            if (err3) return res.status(500)
-        })
-        return res.status(200).json({ accessToken: accessToken, refreshToken: refreshToken });
-
+          if (err3) return res.status(500);
+        });
+        return res
+          .status(200)
+          .json({ accessToken: accessToken, refreshToken: refreshToken });
       }
     });
   });
@@ -36,7 +37,6 @@ router.post("/", async (req, res) => {
 function generateAccessToken(user) {
   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "30m" });
 }
-
 
 function generatRefreshToken(user) {
   return jwt.sign(user, process.env.REFRESH_TOKEN_SECRET);

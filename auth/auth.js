@@ -11,7 +11,6 @@ const tokenRoute = require("./routes/token");
 app.use(express.json());
 
 Object.assign = require("object-assign");
-app.use(morgan("combined"));
 app.use(cors());
 
 // routes
