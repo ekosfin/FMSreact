@@ -10,6 +10,9 @@ const fin = {
     email: "Sähköposti",
     username : "Käyttäjänimi",
     registerNow : "Rekisteröidy",
-    starEqualsRequired : "* = Vaaditaan"
+    starEqualsRequired : "* = Vaaditaan",
+    newTask : "+ Uusi tehtävä",
+    todo : "TO-DO",
+    loggedInAs : "Kirjautuneena"
 };
 export { fin };

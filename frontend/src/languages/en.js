@@ -10,6 +10,9 @@ const eng = {
     email : "E-mail",
     username : "Username",
     registerNow : "Sign me up",
-    starEqualsRequired : "* = Required"
+    starEqualsRequired : "* = Required",
+    newTask : "+ New task",
+    todo : "TO-DO",
+    loggedInAs : "Logged in as"
 };
 export { eng };

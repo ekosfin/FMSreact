@@ -8,6 +8,7 @@ import {
 import Register from "./components/Register";
 import Login from "./components/Login";
 import BottomBar from "./components/BottomBar";
+import TopBar from "./components/TopBar";
 import Home from "./components/Home";
 import Settings from "./components/Settings";
 import DoneTasks from "./components/DoneTasks";
@@ -24,19 +25,22 @@ export default function App() {
       <Router>
         <Switch> 
           <Route path="/done">
-            <BottomBar/>
+            <TopBar language={language}/>
             <DoneTasks language={language}/>
+            <BottomBar location="done"/>
           </Route>
           <Route path="/home">
-            <BottomBar/>
+            <TopBar language={language}/>
             <Home language={language}/>
+            <BottomBar location="home"/>
           </Route>
           <Route path="/register">
             <Register setLanguage={updateLanguage} language={language}/>
           </Route>
           <Route path="/settings">
-            <BottomBar/>
-            <Settings language={language}/>
+            <TopBar language={language}/>
+            <Settings setLanguage={updateLanguage} language={language}/>
+            <BottomBar location="settings"/>
           </Route>
           <Route path="/">
             <Login setLanguage={updateLanguage} language={language}/>

@@ -2,7 +2,8 @@
   --primaryBlue: #4472c4;
   --lightBlue: #5b9bd5;
   --lightGray: #b2b2b2;
-  --normalFont: Verdana, Geneva, sans-serif;
+  --veryLightGray: #d6d6d6;
+  --normalFont: Verdana, sans-serif;
 }
 
 .Login {
@@ -14,7 +15,19 @@
 }
 
 .Home {
-  height: 100vh;
+  font-family: var(--normalFont);
+  padding-bottom: 60px;
+}
+
+.TopBar {
+  font-family: var(--normalFont);
+  background-color: white;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--veryLightGray);
 }
 
 .BottomBar {
@@ -29,6 +42,7 @@
   color: white;
   display: flex;
   justify-content: space-between;
+  /*height: 60px;*/
 }
 
 .languageDiv {
@@ -53,6 +67,13 @@
   text-align: center;
   font-size: 22px;
   margin-top: 10vh;
+}
+
+.titleTextTopBar {
+  font-weight: bold;
+  text-align: left;
+  font-size: 22px;
+  display: inline-block;
 }
 
 .loginInfoDiv {
@@ -108,11 +129,60 @@
   font-size: 16px;
 }
 
+.pageTitle {
+  text-align: left;
+  display: inline-block;
+}
+
+.todoList {
+  border: 1px solid var(--veryLightGray);
+  border-radius: 5px;
+  overflow-y: scroll;
+  height: 58vh;
+}
+
+.homeButtonWrapper {
+  text-align: right;
+  margin-top: 2vh;
+}
+
+.homeTopDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.smallText {
+  text-align: right;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 0;
+}
+
+.task {
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+#homeNewTaskButton {
+  display: inline-block;
+  width: 35%;
+}
+
 #footerHomeButton,
 #footerDoneButton,
-#footerSettingsButton,
-#footerLogoutButton {
+#footerSettingsButton {
   color: white;
+}
+
+#footerHomeButtonDisabled,
+#footerDoneButtonDisabled,
+#footerSettingsButtonDisabled {
+  pointer-events: none;
+  color: var(--lightBlue);
+}
+
+#topLogoutButton {
+  color: var(--primaryBlue);
 }
 
 #loginRegisterButton {

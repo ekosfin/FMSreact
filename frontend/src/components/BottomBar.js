@@ -4,7 +4,6 @@ import { IconButton } from "@material-ui/core";
 import HomeIcon from '@material-ui/icons/Home';
 import DoneIcon from '@material-ui/icons/Done';
 import SettingsIcon from '@material-ui/icons/Settings';
-import LockIcon from '@material-ui/icons/Lock';
 import "../styles.css";
 
 
@@ -23,23 +22,24 @@ export default function BottomBar(props) {
         history.push("/settings");
     }
 
-    function onLogoutClick(){
-        history.push("/");
+    function currentLocationDisable(button){
+        if(button===props.location){ 
+            return true;
+        }else{
+            return false;
+        }
     }
 
     return (
         <div className="BottomBar">
-            <IconButton id="footerHomeButton" onClick={onHomeClick}>
-                <HomeIcon fontSize="large"/>
-            </IconButton>
-            <IconButton id="footerDoneButton" onClick={onDoneClick}>
+            <IconButton id={currentLocationDisable("done")? "footerDoneButtonDisabled" : "footerDoneButton"} onClick={onDoneClick}>
                 <DoneIcon fontSize="large"/>
             </IconButton>
-            <IconButton id="footerSettingsButton" onClick={onSettingsClick}>
-                <SettingsIcon fontSize="large"/>
+            <IconButton id={currentLocationDisable("home")? "footerHomeButtonDisabled" : "footerHomeButton"} onClick={onHomeClick}>
+                <HomeIcon fontSize="large"/>
             </IconButton>
-            <IconButton id="footerLogoutButton" onClick={onLogoutClick}>
-                <LockIcon fontSize="large"/>
+            <IconButton id={currentLocationDisable("settings")? "footerSettingsButtonDisabled" : "footerSettingsButton"} onClick={onSettingsClick}>
+                <SettingsIcon fontSize="large"/>
             </IconButton>
         </div>
     );
