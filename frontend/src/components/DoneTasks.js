@@ -8,6 +8,7 @@ import { fin } from '../languages/fi.js';
 export default function DoneTasks(props) {
     const history = useHistory();
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
+    const [tasksList, setTasksList] = useState(["first", "second", "third"]);
 
     function getLangFromProp(){
         if(props.language==="eng"){
@@ -17,9 +18,20 @@ export default function DoneTasks(props) {
         } 
     }
 
+    function updateTasksState(e) {
+        setTasksList(e);
+    }
+
     return (
         <div className="DoneTasks">
-            Done Tasks
+            <p className="pageTitle">{language.doneTasks}</p>
+            <div className="todoList" id="completeList">
+                {tasksList.map((item) => (
+                    <p key={item} className="task">
+                        {item}
+                    </p>
+                ))}
+            </div>
         </div>
     );
 }

@@ -13,6 +13,16 @@ const eng = {
     starEqualsRequired : "* = Required",
     newTask : "+ New task",
     todo : "TO-DO",
-    loggedInAs : "Logged in as"
+    loggedInAs : "Logged in as",
+    doneTasks : "Completed tasks",
+    settings : "Settings",
+    userTab : "Käyttäjä",
+    taskTab : "Tehtävät",
+    newPassword : "New password",
+    newPwAgain : "New passoword again",
+    language : "Language",
+    currentPw : "Current password",
+    save : "Save",
+    deleteUser : "Delete user"
 };
 export { eng };

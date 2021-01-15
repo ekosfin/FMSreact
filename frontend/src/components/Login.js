@@ -39,17 +39,17 @@ export default function Login(props) {
 
     function engSelected(){
         if(language===eng){
-            return "languageButtonSelect"
+            return "textOnlyButtonSelect"
         }else{
-            return "languageButton"
+            return "textOnlyButton"
         }
     }
 
     function finSelected(){
         if(language===fin){
-            return "languageButtonSelect"
+            return "textOnlyButtonSelect"
         }else{
-            return "languageButton"
+            return "textOnlyButton"
         }
     }
 

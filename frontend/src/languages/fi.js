@@ -13,6 +13,16 @@ const fin = {
     starEqualsRequired : "* = Vaaditaan",
     newTask : "+ Uusi tehtävä",
     todo : "TO-DO",
-    loggedInAs : "Kirjautuneena"
+    loggedInAs : "Kirjautuneena",
+    doneTasks : "Valmiit tehtävät",
+    settings : "Asetukset",
+    userTab : "Käyttäjä",
+    taskTab : "Tehtävät",
+    newPassword : "Uusi salasana",
+    newPwAgain : "Uusi salasana uudelleen",
+    language : "Kieli",
+    currentPw : "Nykyinen salasana",
+    save : "Tallenna",
+    deleteUser : "Poista käyttäjä"
 };
 export { fin };
