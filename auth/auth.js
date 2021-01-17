@@ -7,6 +7,7 @@ const dbConnect = require("./controllers/dbConnect");
 const signupRoute = require("./routes/signup");
 const loginRoute = require("./routes/login");
 const tokenRoute = require("./routes/token");
+const logoutRoute = require("./routes/logout");
 
 app.use(express.json());
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
 app.use("/token", tokenRoute);
+app.use("/logout", logoutRoute);
 
 app.listen(dbConnect.port, dbConnect.ip);
 console.log("Auth running on http://" + dbConnect.ip + ":" + dbConnect.port);
