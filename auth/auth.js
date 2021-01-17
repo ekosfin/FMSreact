@@ -20,5 +20,6 @@ app.use("/login", loginRoute);
 app.use("/token", tokenRoute);
 app.use("/logout", logoutRoute);
 
-app.listen(dbConnect.port, dbConnect.ip);
-console.log("Auth running on http://" + dbConnect.ip + ":" + dbConnect.port);
+app.listen(dbConnect.port, () => {
+  console.log("Auth running on http://" + dbConnect.ip + ":" + dbConnect.port);
+});
