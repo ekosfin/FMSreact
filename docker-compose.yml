@@ -38,6 +38,8 @@ services:
       DOCKER_DB_NAME: app
       ACCESS_TOKEN_SECRET: salaisuus
       REFRESH_TOKEN_SECRET: salaisuus
+    env_file:
+      - ./auth/.env
 
   frontend:
     build: ./frontend
