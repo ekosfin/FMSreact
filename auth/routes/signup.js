@@ -33,7 +33,7 @@ router.post(
       });
 
       await newUserWithoutname.save((err) => {
-        if (err) return res.status(500);
+        if (err) return res.sendStatus(500);
       });
 
       return res.json({ message: "Added" });
@@ -46,7 +46,7 @@ router.post(
     });
 
     await newUser.save((err) => {
-      if (err) return res.status(500);
+      if (err) return res.sendStatus(500);
     });
 
     return res.json({ message: "Added" });

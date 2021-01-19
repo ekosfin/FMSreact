@@ -8,13 +8,13 @@ router.get("/", async (req, res) => {
     return res.status(400).json({ message: "bad content" });
   }
   Token.findOne({ token: req.body.token }, (err, token) => {
-    if (err) return res.status(403);
+    if (err) return res.sendStatus(403);
 
     jwt.verify(
       req.body.Token,
       process.env.REFRESH_TOKEN_SECRET,
       (err2, user) => {
-        if (err2) return res.status(403);
+        if (err2) return res.sendStatus(403);
         let accessToken = generateAccessToken(user);
         return res.json({ accessToken: accessToken });
       }

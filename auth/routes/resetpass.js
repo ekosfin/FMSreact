@@ -16,7 +16,7 @@ router.post("/", async (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {
       console.log(err);
-      return res.status(500);
+      return res.sendStatus(500);
     }
 
     let newReset = new Reset({
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     newReset.save((err2) => {
       if (err2) {
         console.log(err2);
-        return res.status(500);
+        return res.sendStatus(500);
       }
     });
 
@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.log(error);
-        return res.status(500);
+        return res.sendStatus(500);
       }
       console.log("Message sent: %s", info.messageId);
       console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
@@ -76,7 +76,7 @@ router.post("/:id", async (req, res) => {
     if (err) return res.status(403).json("Invalid address");
 
     User.findOne({ email: reset.email }, (err2, user) => {
-      if (err2) return res.status(500);
+      if (err2) return res.sendStatus(500);
       //TODO needs discussion with the group
     });
   });
