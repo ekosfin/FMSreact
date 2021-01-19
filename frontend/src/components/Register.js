@@ -30,8 +30,24 @@ export default function Register(props) {
     updateComponentLanguage(fin);
   }
 
-  function onRegisterClick(){
-        
+  async function onRegisterClick(){
+        const bodyData = {
+          username: username,
+          password: password,
+          email: email
+        }
+
+        await fetch(
+          "http://localhost:4000/signup", {
+            method: "POST",
+            mode: "cors",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(bodyData)
+          }
+        ).then(response => response.json())
+        .then(data => console.log(data));
+
+        history.push("/");
   }
 
   function engSelected(){

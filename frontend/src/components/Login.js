@@ -29,8 +29,22 @@ export default function Login(props) {
         updateComponentLanguage(fin);
     }
 
-    function onLoginClick(){
-        history.push("/home");
+    async function onLoginClick(){
+        const bodyData = {
+            username: username,
+            password: password
+          }
+        await fetch(
+        "http://localhost:4000/login", {
+            method: "POST",
+            mode: "cors",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify(bodyData)
+        }
+        ).then(response => response.json())
+        .then(data => console.log(data));
+
+        //history.push("/home");
     }
     
     function onRegisterClick(){

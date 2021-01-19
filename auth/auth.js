@@ -9,10 +9,10 @@ const loginRoute = require("./routes/login");
 const tokenRoute = require("./routes/token");
 const logoutRoute = require("./routes/logout");
 
-app.use(express.json());
 
 Object.assign = require("object-assign");
 app.use(cors());
+app.use(express.json());
 
 // routes
 app.use("/signup", signupRoute);
