@@ -30,6 +30,16 @@
   padding-bottom: 60px;
 }
 
+.TaskSettings {
+  font-family: var(--normalFont);
+  padding-bottom: 60px;
+}
+
+.NewTask {
+  font-family: var(--normalFont);
+  padding-bottom: 60px;
+}
+
 .TopBar {
   font-family: var(--normalFont);
   background-color: white;
@@ -162,7 +172,7 @@
   margin-top: 2vh;
 }
 
-.homeTopDiv {
+.topDiv {
   display: flex;
   justify-content: space-between;
 }
@@ -202,9 +212,17 @@
   text-align: center;
 }
 
+.tabDiv {
+  display: inline-block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
 #homeNewTaskButton {
   display: inline-block;
-  width: 35%;
+  width: auto;
 }
 
 #footerHomeButton,

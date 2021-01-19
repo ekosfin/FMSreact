@@ -8,6 +8,11 @@ import { fin } from '../languages/fi.js';
 export default function Settings(props) {
     const history = useHistory();
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState("");
+    const [newPw, setNewPw] = useState("");
+    const [newPwAgain, setNewPwAgain] = useState("");
 
     function getLangFromProp(){
         if(props.language==="eng"){
@@ -17,6 +22,9 @@ export default function Settings(props) {
         } 
     }
 
+    //UseEffect Check user has permission to be here, token
+    //Request to back to get user information, username, email
+
     function engSelected(){
         if(language===eng){
             return "textOnlyButtonSelect"
@@ -25,13 +33,17 @@ export default function Settings(props) {
         }
       }
     
-      function finSelected(){
-          if(language===fin){
-              return "textOnlyButtonSelect"
-          }else{
-              return "textOnlyButton"
-          }
-      }
+    function finSelected(){
+        if(language===fin){
+            return "textOnlyButtonSelect"
+        }else{
+            return "textOnlyButton"
+        }
+    }
+
+    function onTaskTabClick(){
+        history.push("/taskSettings");
+    }
 
     function onEngClick(){
         props.setLanguage("eng");
@@ -44,24 +56,58 @@ export default function Settings(props) {
     }
 
     function onSaveClick(){
+        //Request to back to save new user settings
     }
 
     function onDeleteUserClick(){
+        //Alert of some kind to confirm this is wanted
+        //Request to back to delete user
     }
 
     function updateComponentLanguage(e){
         setComponentLanguage(e);
     }
 
+    function updateEmailState(e) {
+        setEmail(e.target.value);
+      }
+    
+      function updatePasswordState(e) {
+        setPassword(e.target.value);
+      }
+    
+      function updateUsernameState(e) {
+        setUsername(e.target.value);
+      }
+
+      function updateNewPasswordState(e) {
+        setNewPw(e.target.value);
+      }
+
+      function updateNewPassword2State(e) {
+        setNewPwAgain(e.target.value);
+      }
+    
     return (
         <div className="Settings">
-
-            <p className="pageTitle" id="pageTitleWithPadding">{language.settings}</p>
+            <div className="topDiv">
+                <p className="pageTitle" id="pageTitleWithPadding">{language.settings}</p>
+                <div className="tabDiv">
+                    <button className={"textOnlyButtonSelect"}>
+                        {language.userTab}
+                    </button>
+                    <button className={"textOnlyButton"} onClick={onTaskTabClick}>
+                        {language.taskTab}
+                    </button>
+                </div>
+            </div>
             <div className="settingsDivider">
                 <p className="normalLeftText">{language.username}</p>
                 <input
                     type="text"
                     className="settingInfoInput"
+                    value={username}
+                    onChange={updateUsernameState}
                 />
             </div>
             <div className="settingsDivider">
@@ -69,11 +115,15 @@ export default function Settings(props) {
                 <input
                     type="text"
                     className="settingInfoInput"
+                    onChange={updateNewPasswordState}
+                    value={newPw}
                 />
                 <p className="normalLeftText">{language.newPwAgain}</p>
                 <input
                     type="text"
                     className="settingInfoInput"
+                    onChange={updateNewPassword2State}
+                    value={newPwAgain}
                 />
             </div>
             <div className="settingsDivider">
@@ -81,6 +131,8 @@ export default function Settings(props) {
                 <input
                     type="text"
                     className="settingInfoInput"
+                    onChange={updateEmailState}
+                    value={email}
                 />
             </div>
             <div className="settingsDivider" id="settingsBottomPadding">
@@ -99,6 +151,8 @@ export default function Settings(props) {
                 <input
                     type="text"
                     className="settingInfoInput"
+                    onChange={updatePasswordState}
+                    value={password}
                 />
                 <button className="normalButton" id="settingsSave" onClick={onSaveClick}>
                     {language.save}
