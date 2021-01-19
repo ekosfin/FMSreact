@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useHistory } from "react-router-dom";
 import "../styles.css";
 import { eng } from '../languages/en.js';
@@ -6,9 +6,11 @@ import { fin } from '../languages/fi.js';
 
 
 export default function DoneTasks(props) {
-    const history = useHistory();
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
     const [tasksList, setTasksList] = useState(["first", "second", "third"]);
+
+    //UseEffect Check user has permission to be here, token
+    //Request to back to get user's previous tasks list
 
     function getLangFromProp(){
         if(props.language==="eng"){

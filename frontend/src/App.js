@@ -12,6 +12,9 @@ import TopBar from "./components/TopBar";
 import Home from "./components/Home";
 import Settings from "./components/Settings";
 import DoneTasks from "./components/DoneTasks";
+import TaskSettings from "./components/TaskSettings";
+import NewTask from "./components/NewTask";
+
 
 export default function App() {
   const [language, setLanguage] = useState("eng");
@@ -41,6 +44,16 @@ export default function App() {
             <TopBar language={language}/>
             <Settings setLanguage={updateLanguage} language={language}/>
             <BottomBar location="settings"/>
+          </Route>
+          <Route path="/taskSettings">
+            <TopBar language={language}/>
+            <TaskSettings language={language}/>
+            <BottomBar location="settings"/>
+          </Route>
+          <Route path="/newTask">
+            <TopBar language={language}/>
+            <NewTask language={language}/>
+            <BottomBar location="none"/>
           </Route>
           <Route path="/">
             <Login setLanguage={updateLanguage} language={language}/>

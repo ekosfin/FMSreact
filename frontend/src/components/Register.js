@@ -31,7 +31,7 @@ export default function Register(props) {
   }
 
   function onRegisterClick(){
-        
+        //Register request to backend, with state values email, username and password
   }
 
   function engSelected(){

@@ -30,6 +30,8 @@ export default function Login(props) {
     }
 
     function onLoginClick(){
+        //Login request to backend with state values password and username
+        //Get back token
         history.push("/home");
     }
     
