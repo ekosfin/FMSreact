@@ -65,23 +65,23 @@ export default function Settings(props) {
 
     function updateEmailState(e) {
         setEmail(e.target.value);
-      }
+    }
     
-      function updatePasswordState(e) {
+    function updatePasswordState(e) {
         setPassword(e.target.value);
-      }
+    }
     
-      function updateUsernameState(e) {
+    function updateUsernameState(e) {
         setUsername(e.target.value);
-      }
+    }
 
-      function updateNewPasswordState(e) {
+    function updateNewPasswordState(e) {
         setNewPw(e.target.value);
-      }
+    }
 
-      function updateNewPassword2State(e) {
+    function updateNewPassword2State(e) {
         setNewPwAgain(e.target.value);
-      }
+    }
     
     return (
         <div className="Settings">

@@ -26,6 +26,12 @@ const eng = {
     deleteUser : "Delete user",
     newTask : "New task",
     taskName : "Title",
-    createTask : "Create task"
+    createTask : "Create task",
+    emailNotif : "E-mail notifications",
+    notifTime : "Notification time",
+    before : "Before",
+    saveTime : "Save time",
+    currNotifs : "Current notifications",
+    taskDate : "Date"
 };
 export { eng };

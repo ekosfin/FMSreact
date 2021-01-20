@@ -9,6 +9,7 @@ export default function NewTask(props) {
     const history = useHistory();
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
     const [taskName, setTaskName] = useState("");
+    const [taskDate, setTaskDate] = useState("");
 
     function getLangFromProp(){
         if(props.language==="eng"){
@@ -18,12 +19,15 @@ export default function NewTask(props) {
         } 
     }
 
-    function onNewTaskClick(){
-        history.push("/newTask");
+    function onCreateTaskClick(){
     }
     
     function updateTaskNameState(e) {
         setTaskName(e.target.value);
+    }
+
+    function updateTaskDateState(e) {
+        setTaskDate(e.target.value);
     }
 
     return (
@@ -38,8 +42,17 @@ export default function NewTask(props) {
                     onChange={updateTaskNameState}
                 />
             </div>
+            <div className="settingsDivider">
+                <p className="normalLeftText">{language.taskDate}</p>
+                <input
+                    type="text"
+                    className="settingInfoInput"
+                    value={taskDate}
+                    onChange={updateTaskDateState}
+                />
+            </div>
             <div className="homeButtonWrapper">
-                <button className="normalButton" id="homeNewTaskButton" onClick={onNewTaskClick}>
+                <button className="normalButton" id="homeNewTaskButton" onClick={onCreateTaskClick}>
                     {language.createTask}
                 </button>
             </div>

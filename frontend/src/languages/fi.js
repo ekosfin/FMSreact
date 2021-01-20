@@ -26,6 +26,12 @@ const fin = {
     deleteUser : "Poista käyttäjä",
     newTask : "Uusi tehtävä",
     taskName : "Otsikko",
-    createTask : "Luo tehtävä"
+    createTask : "Luo tehtävä",
+    emailNotif : "Sähköposti-ilmoitukset",
+    notifTime : "Ilmoitusaika",
+    before : "Ennen",
+    saveTime : "Tallenna aika",
+    currNotifs : "Nykyiset ilmoitukset",
+    taskDate : "Päivämäärä"
 };
 export { fin };
