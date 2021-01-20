@@ -4,6 +4,8 @@ const morgan = require("morgan");
 const dbConnect = require("./controllers/dbConnect");
 const cors = require("cors");
 const newtaskRoute = require("./routes/newtask");
+const removetaskRoute = require("./routes/removetask");
+const gettasksRoute = require("./routes/gettasks");
 
 Object.assign = require("object-assign");
 app.use(express.json());
@@ -12,6 +14,8 @@ app.use(cors());
 app.use(require("./auth"));
 
 app.use("/newtask", newtaskRoute);
+app.use("/removetask", removetaskRoute);
+app.use("/gettasks", gettasksRoute);
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
