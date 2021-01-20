@@ -21,6 +21,7 @@ services:
       IP: 0.0.0.0
       DOCKER_DB: mongo
       DOCKER_DB_NAME: app
+      ACCESS_TOKEN_SECRET: salaisuus
 
   auth:
     build: ./auth

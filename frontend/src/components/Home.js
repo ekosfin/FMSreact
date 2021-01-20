@@ -10,7 +10,6 @@ export default function Home(props) {
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
   const [tasksList, setTasksList] = useState(["first", "second", "third"]);
   const user = jwt_decode(localStorage.getItem("accessToken"));
-  console.log(user);
 
   function getLangFromProp() {
     if (props.language === "eng") {
