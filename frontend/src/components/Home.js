@@ -10,9 +10,6 @@ export default function Home(props) {
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
     const [tasksList, setTasksList] = useState(["first", "second", "third"]);
 
-    //UseEffect Check user has permission to be here, token
-    //Request to back to get user task list and username
-
     function getLangFromProp(){
         if(props.language==="eng"){
             return eng;
@@ -42,7 +39,7 @@ export default function Home(props) {
             </div>
             <div className="homeButtonWrapper">
                 <button className="normalButton" id="homeNewTaskButton" onClick={onNewTaskClick}>
-                    {language.newTask}
+                    {language.addNewTask}
                 </button>
             </div>
         </div>

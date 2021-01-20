@@ -9,9 +9,6 @@ export default function DoneTasks(props) {
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
     const [tasksList, setTasksList] = useState(["first", "second", "third"]);
 
-    //UseEffect Check user has permission to be here, token
-    //Request to back to get user's previous tasks list
-
     function getLangFromProp(){
         if(props.language==="eng"){
             return eng;

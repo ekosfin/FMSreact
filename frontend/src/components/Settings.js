@@ -22,9 +22,6 @@ export default function Settings(props) {
         } 
     }
 
-    //UseEffect Check user has permission to be here, token
-    //Request to back to get user information, username, email
-
     function engSelected(){
         if(language===eng){
             return "textOnlyButtonSelect"
@@ -56,12 +53,10 @@ export default function Settings(props) {
     }
 
     function onSaveClick(){
-        //Request to back to save new user settings
     }
 
     function onDeleteUserClick(){
         //Alert of some kind to confirm this is wanted
-        //Request to back to delete user
     }
 
     function updateComponentLanguage(e){

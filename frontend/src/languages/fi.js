@@ -11,7 +11,7 @@ const fin = {
     username : "Käyttäjänimi",
     registerNow : "Rekisteröidy",
     starEqualsRequired : "* = Vaaditaan",
-    newTask : "+ Uusi tehtävä",
+    addNewTask : "+ Uusi tehtävä",
     todo : "TO-DO",
     loggedInAs : "Kirjautuneena",
     doneTasks : "Valmiit tehtävät",
@@ -23,6 +23,9 @@ const fin = {
     language : "Kieli",
     currentPw : "Nykyinen salasana",
     save : "Tallenna",
-    deleteUser : "Poista käyttäjä"
+    deleteUser : "Poista käyttäjä",
+    newTask : "Uusi tehtävä",
+    taskName : "Otsikko",
+    createTask : "Luo tehtävä"
 };
 export { fin };

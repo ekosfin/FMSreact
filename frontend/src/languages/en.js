@@ -11,7 +11,7 @@ const eng = {
     username : "Username",
     registerNow : "Sign me up",
     starEqualsRequired : "* = Required",
-    newTask : "+ New task",
+    addNewTask : "+ New task",
     todo : "TO-DO",
     loggedInAs : "Logged in as",
     doneTasks : "Completed tasks",
@@ -23,6 +23,9 @@ const eng = {
     language : "Language",
     currentPw : "Current password",
     save : "Save",
-    deleteUser : "Delete user"
+    deleteUser : "Delete user",
+    newTask : "New task",
+    taskName : "Title",
+    createTask : "Create task"
 };
 export { eng };

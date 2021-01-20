@@ -8,6 +8,7 @@ import { fin } from '../languages/fi.js';
 export default function NewTask(props) {
     const history = useHistory();
     const [language, setComponentLanguage] = useState(()  => getLangFromProp());
+    const [taskName, setTaskName] = useState("");
 
     function getLangFromProp(){
         if(props.language==="eng"){
@@ -17,12 +18,31 @@ export default function NewTask(props) {
         } 
     }
 
-    //UseEffect Check user has permission to be here, token
-    //Request to back to make a task
+    function onNewTaskClick(){
+        history.push("/newTask");
+    }
+    
+    function updateTaskNameState(e) {
+        setTaskName(e.target.value);
+    }
 
     return (
         <div className="NewTask">
-            New task
+            <p className="pageTitle">{language.newTask}</p>
+            <div className="settingsDivider">
+                <p className="normalLeftText">{language.taskName}</p>
+                <input
+                    type="text"
+                    className="settingInfoInput"
+                    value={taskName}
+                    onChange={updateTaskNameState}
+                />
+            </div>
+            <div className="homeButtonWrapper">
+                <button className="normalButton" id="homeNewTaskButton" onClick={onNewTaskClick}>
+                    {language.createTask}
+                </button>
+            </div>
         </div>
     );
 }
