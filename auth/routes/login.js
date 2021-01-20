@@ -14,9 +14,8 @@ router.post("/", async (req, res) => {
     if (err) return res.sendStatus(500);
     if (!user) return res.sendStatus(403);
 
-    console.log("tassa kayttaja" + user);
     // test a matching password
-    user.comparePassword(req.body.username, async (err2, isMatch) => {
+    user.comparePassword(req.body.password, async (err2, isMatch) => {
       if (err2) return res.sendStatus(401);
       if (isMatch) {
         let accessToken = generateAccessToken(user);
