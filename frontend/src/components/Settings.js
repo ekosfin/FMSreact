@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "../styles.css";
-import { eng } from "../languages/en.js";
-import { fin } from "../languages/fi.js";
+import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import '../styles.css';
+import {eng} from '../languages/en.js';
+import {fin} from '../languages/fi.js';
 
 export default function Settings(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-  const [newPw, setNewPw] = useState("");
-  const [newPwAgain, setNewPwAgain] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [newPwAgain, setNewPwAgain] = useState('');
 
   useEffect(() => {
     fetchInfo();
   }, []);
 
   function fetchInfo() {
-    fetch("http://localhost:4000/user", {
-      method: "GET",
+    fetch('http://localhost:4000/user', {
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
       },
     })
       .then((res) => res.json())
@@ -33,47 +33,47 @@ export default function Settings(props) {
   }
 
   function getLangFromProp() {
-    if (props.language === "eng") {
+    if (props.language === 'eng') {
       return eng;
-    } else if (props.language === "fin") {
+    } else if (props.language === 'fin') {
       return fin;
     }
   }
 
   function engSelected() {
     if (language === eng) {
-      return "textOnlyButtonSelect";
+      return 'textOnlyButtonSelect';
     } else {
-      return "textOnlyButton";
+      return 'textOnlyButton';
     }
   }
 
   function finSelected() {
     if (language === fin) {
-      return "textOnlyButtonSelect";
+      return 'textOnlyButtonSelect';
     } else {
-      return "textOnlyButton";
+      return 'textOnlyButton';
     }
   }
 
   function onTaskTabClick() {
-    history.push("/taskSettings");
+    history.push('/taskSettings');
   }
 
   function onEngClick() {
-    props.setLanguage("eng");
+    props.setLanguage('eng');
     updateComponentLanguage(eng);
   }
 
   function onFinClick() {
-    props.setLanguage("fin");
+    props.setLanguage('fin');
     updateComponentLanguage(fin);
   }
 
   function onSaveClick() {
     if (newPw) {
       if (newPw !== newPwAgain) {
-        console.log("New password mismatch");
+        console.log('New password mismatch');
         return;
       }
     }
@@ -85,11 +85,11 @@ export default function Settings(props) {
       newemail: email,
     };
 
-    fetch("http://localhost:4000/user", {
-      method: "POST",
+    fetch('http://localhost:4000/user', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
       },
       body: JSON.stringify(bodyData),
     })
@@ -132,8 +132,8 @@ export default function Settings(props) {
           {language.settings}
         </p>
         <div className="tabDiv">
-          <button className={"textOnlyButtonSelect"}>{language.userTab}</button>
-          <button className={"textOnlyButton"} onClick={onTaskTabClick}>
+          <button className={'textOnlyButtonSelect'}>{language.userTab}</button>
+          <button className={'textOnlyButton'} onClick={onTaskTabClick}>
             {language.taskTab}
           </button>
         </div>

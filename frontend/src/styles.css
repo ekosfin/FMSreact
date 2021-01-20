@@ -189,6 +189,12 @@
   margin-bottom: 0;
 }
 
+.smallTextInline {
+  font-size: 16px;
+  display: inline-block;
+  margin-bottom: 0;
+}
+
 .task {
   margin-top: 4px;
   margin-left: 4px;
@@ -234,6 +240,11 @@
   border-radius: 5px;
   overflow-y: scroll;
   height: 48vh;
+}
+
+.leftRightDisplayDiv {
+  display: flex;
+  justify-content: space-between;
 }
 
 #homeNewTaskButton {
@@ -304,4 +315,13 @@
   height: auto;
   margin-top: 25px;
   display: inline-block;
+}
+
+#homeInlineLoggedIn {
+  display: inline-block;
+}
+
+#homeUsername {
+  margin-top: 0;
+  margin-block-end: 1em;
 }
