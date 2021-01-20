@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
+const auth_controller = require("../controllers/authController");
 
 router.get("/", auth_controller.verify_token, (res, req) => {
   return res.json({ email: req.user.email, username: req.user.username });
