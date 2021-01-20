@@ -220,6 +220,22 @@
   margin-inline-end: 0px;
 }
 
+.notif {
+  margin: 15px;
+  border-bottom: 1px solid var(--veryLightGray);
+}
+
+.checkToggle {
+  color: var(--lightBlue);
+}
+
+.notifList {
+  border: 1px solid var(--veryLightGray);
+  border-radius: 5px;
+  overflow-y: scroll;
+  height: 48vh;
+}
+
 #homeNewTaskButton {
   display: inline-block;
   width: auto;
@@ -280,4 +296,12 @@
 #settingsbottomDiv {
   padding: 0;
   border-top: 1px solid var(--veryLightGray);
+}
+
+#removeAllNotifsButton {
+  background-color: var(--red);
+  font-size: 16px;
+  height: auto;
+  margin-top: 25px;
+  display: inline-block;
 }
