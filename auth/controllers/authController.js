@@ -8,7 +8,7 @@ exports.verify_token = function (req, res, next) {
 
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     console.log(err);
-    if (err) return res.Status(403).json("Tokken invalid");
+    if (err) return res.status(403).json("Token invalid");
     req.user = user;
     // nyt on onnisteesti tarkistettu joten voidaan siirtyä eteenpäin
     next();

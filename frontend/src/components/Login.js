@@ -42,9 +42,12 @@ export default function Login(props) {
             body: JSON.stringify(bodyData)
         }
         ).then(response => response.json())
-        .then(data => console.log(data));
+        .then(data => {
+            localStorage.setItem("accessToken", data.accessToken);
+            localStorage.setItem("refreshToken", data.refreshToken);
+        });
 
-        //history.push("/home");
+        history.push("/home");
     }
     
     function onRegisterClick(){

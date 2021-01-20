@@ -31,10 +31,12 @@ router.post(
         password: req.body.password,
         email: req.body.email,
       });
-
-      await newUserWithoutname.save((err) => {
-        if (err) return res.sendStatus(500);
-      });
+      try {
+        await newUserWithoutname.save();
+      } catch (err) {
+        console.error(err);
+        return res.sendStatus(500);
+      }
 
       return res.json({ message: "Added" });
     }
@@ -44,10 +46,12 @@ router.post(
       password: req.body.password,
       email: req.body.email,
     });
-
-    await newUser.save((err) => {
-      if (err) return res.sendStatus(500);
-    });
+    try {
+      await newUser.save();
+    } catch (err) {
+      console.error(err);
+      return res.sendStatus(500);
+    }
 
     return res.json({ message: "Added" });
   }
