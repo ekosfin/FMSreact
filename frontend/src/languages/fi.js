@@ -34,5 +34,6 @@ const fin = {
   currNotifs: 'Nykyiset ilmoitukset',
   taskDate: 'Päivämäärä',
   removeAllNotifs: 'Poista kaikki nykyiset sähköposti-ilmoitukset',
+  removeTask: 'Poista',
 };
 export {fin};

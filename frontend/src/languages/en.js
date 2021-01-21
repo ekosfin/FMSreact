@@ -34,5 +34,6 @@ const eng = {
   currNotifs: 'Current notifications',
   taskDate: 'Date',
   removeAllNotifs: 'Remove all current E-mail notifications',
+  removeTask: 'Delete',
 };
 export {eng};

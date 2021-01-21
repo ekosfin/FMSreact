@@ -1,4 +1,5 @@
-import react from "react";
+import react from 'react';
+import '../styles.css';
 
 export default function Post(props) {
   async function removeTask() {
@@ -6,11 +7,11 @@ export default function Post(props) {
       _id: props.id,
     };
 
-    const res = await fetch("http://localhost:5000/removetask", {
-      method: "POST",
+    const res = await fetch('http://localhost:5000/removetask', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
       },
       body: JSON.stringify(bodyData),
     });
@@ -22,9 +23,13 @@ export default function Post(props) {
 
   return (
     <div className="task">
-      <h3>{props.title}</h3>
-      <h5>{props.date.toLocaleString()}</h5>
-      <button onClick={removeTask}>Remove Task</button>
+      <div className="leftRightDisplayDiv">
+        <h3 className="listTaskName">{props.title}</h3>
+        <button className="smallBorderButton" onClick={removeTask}>
+          {props.lang.removeTask}
+        </button>
+      </div>
+      <h5 className="listTaskDate">{props.date.toLocaleString()}</h5>
     </div>
   );
 }

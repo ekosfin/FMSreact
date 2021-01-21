@@ -196,8 +196,8 @@
 }
 
 .task {
-  margin-top: 4px;
-  margin-left: 4px;
+  margin: 1em;
+  border-bottom: 1px solid var(--veryLightGray);
 }
 
 .settingsLanguageDiv {
@@ -245,6 +245,28 @@
 .leftRightDisplayDiv {
   display: flex;
   justify-content: space-between;
+}
+
+.smallBorderButton {
+  background-color: transparent;
+  border: 2px solid var(--primaryBlue);
+  color: var(--primaryBlue);
+  display: inline-block;
+  border-radius: 5px;
+  height: 35px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.listTaskName {
+  font-size: 18px;
+  display: inline-block;
+  margin: 0;
+}
+
+.listTaskDate {
+  margin: 0;
+  margin-bottom: 1em;
 }
 
 #homeNewTaskButton {
@@ -319,6 +341,7 @@
 
 #homeInlineLoggedIn {
   display: inline-block;
+  font-size: 14px;
 }
 
 #homeUsername {
