@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const Token = require("../models/tokenModels");
+const auth_controller = require("../controllers/authController");
 
 router.get("/", async (req, res) => {
   if (req.body.token === null) {
@@ -15,15 +16,11 @@ router.get("/", async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET,
       (err2, user) => {
         if (err2) return res.sendStatus(403);
-        let accessToken = generateAccessToken(user);
+        let accessToken = auth_controller.generateAccessToken(user);
         return res.json({ accessToken: accessToken });
       }
     );
   });
 });
-
-function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "30m" });
-}
 
 module.exports = router;

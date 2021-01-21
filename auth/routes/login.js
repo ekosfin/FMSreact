@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
 const Token = require("../models/tokenModels");
-const jwt = require("jsonwebtoken");
+const auth_controller = require("../controllers/authController");
 
 router.post("/", async (req, res) => {
   if (req.body.password === null) {
@@ -29,8 +29,8 @@ router.post("/", async (req, res) => {
           return res.sendStatus(401);
         }
         if (isMatch) {
-          let accessToken = generateAccessToken(user);
-          let refreshToken = generatRefreshToken(user);
+          let accessToken = auth_controller.generateAccessToken(user);
+          let refreshToken = auth_controller.generatRefreshToken(user);
           let newRefreshToken = new Token({
             userID: user._id,
             token: refreshToken,
@@ -49,15 +49,5 @@ router.post("/", async (req, res) => {
     }
   );
 });
-
-function generateAccessToken(user) {
-  return jwt.sign(user.toObject(), process.env.ACCESS_TOKEN_SECRET, {
-    expiresIn: "9999m",
-  });
-}
-
-function generatRefreshToken(user) {
-  return jwt.sign(user.toObject(), process.env.REFRESH_TOKEN_SECRET);
-}
 
 module.exports = router;
