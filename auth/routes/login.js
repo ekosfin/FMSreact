@@ -43,7 +43,11 @@ router.post("/", async (req, res) => {
           }
           return res
             .status(200)
-            .json({ accessToken: accessToken, refreshToken: refreshToken });
+            .json({
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+              message: "Login successful",
+            });
         }
       });
     }

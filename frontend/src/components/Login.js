@@ -28,12 +28,12 @@ export default function Login(props) {
     updateComponentLanguage(fin);
   }
 
-  async function onLoginClick() {
+  function onLoginClick() {
     const bodyData = {
       username: username,
       password: password,
     };
-    await fetch("http://localhost:4000/login", {
+    fetch("http://localhost:4000/login", {
       method: "POST",
       mode: "cors",
       headers: { "Content-Type": "application/json" },
@@ -41,11 +41,13 @@ export default function Login(props) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.message);
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
+        if (data.message === "Login successful") {
+          history.push("/home");
+        }
       });
-
-    history.push("/home");
   }
 
   function onRegisterClick() {

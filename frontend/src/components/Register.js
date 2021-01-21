@@ -1,72 +1,70 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../styles.css";
-import { eng } from '../languages/en.js'
-import { fin } from '../languages/fi.js'
-
+import { eng } from "../languages/en.js";
+import { fin } from "../languages/fi.js";
 
 export default function Register(props) {
   const history = useHistory();
-  const [language, setComponentLanguage] = useState(()  => getLangFromProp());
+  const [language, setComponentLanguage] = useState(() => getLangFromProp());
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  function getLangFromProp(){
-    if(props.language==="eng"){
-        return eng;
-    }else if(props.language==="fin"){
-        return fin;
-    } 
+  function getLangFromProp() {
+    if (props.language === "eng") {
+      return eng;
+    } else if (props.language === "fin") {
+      return fin;
+    }
   }
 
-  function onEngClick(){
+  function onEngClick() {
     props.setLanguage("eng");
     updateComponentLanguage(eng);
   }
 
-  function onFinClick(){
+  function onFinClick() {
     props.setLanguage("fin");
     updateComponentLanguage(fin);
   }
 
-  async function onRegisterClick(){
-        const bodyData = {
-          username: username,
-          password: password,
-          email: email
-        }
+  function onRegisterClick() {
+    const bodyData = {
+      username: username,
+      password: password,
+      email: email,
+    };
 
-        await fetch(
-          "http://localhost:4000/signup", {
-            method: "POST",
-            mode: "cors",
-            headers: {"Content-Type":"application/json"},
-            body: JSON.stringify(bodyData)
-          }
-        ).then(response => response.json())
-        .then(data => console.log(data));
+    fetch("http://localhost:4000/signup", {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bodyData),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
 
-        history.push("/");
+    history.push("/");
   }
 
-  function engSelected(){
-    if(language===eng){
-        return "textOnlyButtonSelect"
-    }else{
-        return "textOnlyButton"
+  function engSelected() {
+    if (language === eng) {
+      return "textOnlyButtonSelect";
+    } else {
+      return "textOnlyButton";
     }
   }
 
-  function finSelected(){
-      if(language===fin){
-          return "textOnlyButtonSelect"
-      }else{
-          return "textOnlyButton"
-      }
+  function finSelected() {
+    if (language === fin) {
+      return "textOnlyButtonSelect";
+    } else {
+      return "textOnlyButton";
+    }
   }
 
-  function updateComponentLanguage(e){
+  function updateComponentLanguage(e) {
     setComponentLanguage(e);
   }
 
@@ -82,8 +80,6 @@ export default function Register(props) {
     setUsername(e.target.value);
   }
 
-  
-
   return (
     <div className="Register">
       <div className="languageDiv">
@@ -98,14 +94,14 @@ export default function Register(props) {
       <p className="highlightText">{language.registerExplanation}</p>
       <div id="registerInfoWrapper">
         <div className="registerInfoDiv">
-          <p className="normalText">{(language.email+"*")}</p>
+          <p className="normalText">{language.email + "*"}</p>
           <input
             type="text"
             className="infoInput"
             value={email}
             onChange={updateEmailState}
           />
-          <p className="normalText">{(language.password+"*")}</p>
+          <p className="normalText">{language.password + "*"}</p>
           <input
             type="text"
             className="infoInput"
@@ -122,7 +118,11 @@ export default function Register(props) {
           <p className="smallHighlightText">{language.starEqualsRequired}</p>
         </div>
       </div>
-      <button className="normalButton" id="registerButton" onClick={onRegisterClick}>
+      <button
+        className="normalButton"
+        id="registerButton"
+        onClick={onRegisterClick}
+      >
         {language.registerNow}
       </button>
     </div>
