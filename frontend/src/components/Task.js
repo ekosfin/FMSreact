@@ -21,11 +21,35 @@ export default function Post(props) {
     }
   }
 
+  function urgentTaskTest() {
+    let currentDate = new Date();
+    let taskDate = props.date;
+    const diffTime = Math.abs(taskDate - currentDate);
+    const diffTimeHours = Math.ceil(diffTime / (1000 * 60 * 60));
+    if (diffTimeHours < 48) {
+      return 'urgentTask';
+    } else {
+      return 'task';
+    }
+  }
+
+  function urgentButtonTest() {
+    let currentDate = new Date();
+    let taskDate = props.date;
+    const diffTime = Math.abs(taskDate - currentDate);
+    const diffTimeHours = Math.ceil(diffTime / (1000 * 60 * 60));
+    if (diffTimeHours < 48) {
+      return 'smallBorderButtonBlack';
+    } else {
+      return 'smallBorderButton';
+    }
+  }
+
   return (
-    <div className="task">
+    <div className={urgentTaskTest()}>
       <div className="leftRightDisplayDiv">
         <h3 className="listTaskName">{props.title}</h3>
-        <button className="smallBorderButton" onClick={removeTask}>
+        <button className={urgentButtonTest()} onClick={removeTask}>
           {props.lang.removeTask}
         </button>
       </div>

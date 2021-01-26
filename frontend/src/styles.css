@@ -4,6 +4,7 @@
   --lightGray: #b2b2b2;
   --veryLightGray: #d6d6d6;
   --red: #ff0000;
+  --lightRed: #ff9999;
   --normalFont: Verdana, sans-serif;
 }
 
@@ -113,6 +114,7 @@
 
 .infoInput {
   width: 75vw;
+  /*maxwidth*/
   border-radius: 5px;
   border-style: solid;
   border-width: 1px;
@@ -196,8 +198,16 @@
 }
 
 .task {
-  margin: 1em;
+  padding: 1em;
+  margin-top: 1em;
   border-bottom: 1px solid var(--veryLightGray);
+  border-top: 1px solid var(--veryLightGray);
+}
+
+.urgentTask {
+  padding: 1em;
+  margin-top: 1em;
+  background-color: var(--lightRed);
 }
 
 .settingsLanguageDiv {
@@ -258,6 +268,17 @@
   font-weight: bold;
 }
 
+.smallBorderButtonBlack {
+  background-color: transparent;
+  border: 2px solid black;
+  color: black;
+  display: inline-block;
+  border-radius: 5px;
+  height: 35px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 .listTaskName {
   font-size: 18px;
   display: inline-block;
@@ -266,7 +287,6 @@
 
 .listTaskDate {
   margin: 0;
-  margin-bottom: 1em;
 }
 
 #homeNewTaskButton {
