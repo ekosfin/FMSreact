@@ -1,24 +1,24 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "../styles.css";
-import { eng } from "../languages/en.js";
-import { fin } from "../languages/fi.js";
-import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import fi from "date-fns/locale/fi";
-registerLocale("fi", fi);
+import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import '../styles.css';
+import {eng} from '../languages/en.js';
+import {fin} from '../languages/fi.js';
+import DatePicker, {registerLocale, setDefaultLocale} from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import fi from 'date-fns/locale/fi';
+registerLocale('fi', fi);
 
 export default function NewTask(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [taskName, setTaskName] = useState("");
-  const [taskDate, setTaskDate] = useState("");
+  const [taskName, setTaskName] = useState('');
+  const [taskDate, setTaskDate] = useState('');
   const [startDate, setStartDate] = useState(new Date());
 
   function getLangFromProp() {
-    if (props.language === "eng") {
+    if (props.language === 'eng') {
       return eng;
-    } else if (props.language === "fin") {
+    } else if (props.language === 'fin') {
       return fin;
     }
   }
@@ -29,16 +29,16 @@ export default function NewTask(props) {
       date: startDate,
     };
 
-    await fetch("http://localhost:5000/newtask", {
-      method: "POST",
+    await fetch('http://localhost:5000/newtask', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
       },
       body: JSON.stringify(bodyData),
     });
 
-    history.push("/home");
+    history.push('/home');
   }
 
   function updateTaskNameState(e) {
@@ -61,9 +61,10 @@ export default function NewTask(props) {
           onChange={updateTaskNameState}
         />
       </div>
-      <div className="settingsDivider">
+      <div className="newTaskDateDivider">
         <p className="normalLeftText">{language.taskDate}</p>
         <DatePicker
+          className="newTaskDatePicker"
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           locale="fi"
