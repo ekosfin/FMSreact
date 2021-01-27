@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "../styles.css";
-import { eng } from "../languages/en.js";
-import { fin } from "../languages/fi.js";
+import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import '../styles.css';
+import {eng} from '../languages/en.js';
+import {fin} from '../languages/fi.js';
 
 export default function Login(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   function getLangFromProp() {
-    if (props.language === "eng") {
+    if (props.language === 'eng') {
       return eng;
-    } else if (props.language === "fin") {
+    } else if (props.language === 'fin') {
       return fin;
     }
   }
 
   function onEngClick() {
-    props.setLanguage("eng");
+    props.setLanguage('eng');
     updateComponentLanguage(eng);
   }
 
   function onFinClick() {
-    props.setLanguage("fin");
+    props.setLanguage('fin');
     updateComponentLanguage(fin);
   }
 
@@ -33,40 +33,40 @@ export default function Login(props) {
       username: username,
       password: password,
     };
-    fetch("http://localhost:4000/login", {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
+    fetch('http://localhost:4000/login', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(bodyData),
     })
       .then((response) => response.json())
       .then((data) => {
         console.log(data.message);
-        localStorage.setItem("accessToken", data.accessToken);
-        localStorage.setItem("refreshToken", data.refreshToken);
-        if (data.message === "Login successful") {
-          history.push("/home");
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        if (data.message === 'Login successful') {
+          history.push('/home');
         }
       });
   }
 
   function onRegisterClick() {
-    history.push("/register");
+    history.push('/register');
   }
 
   function engSelected() {
     if (language === eng) {
-      return "textOnlyButtonSelect";
+      return 'textOnlyButtonSelect';
     } else {
-      return "textOnlyButton";
+      return 'textOnlyButton';
     }
   }
 
   function finSelected() {
     if (language === fin) {
-      return "textOnlyButtonSelect";
+      return 'textOnlyButtonSelect';
     } else {
-      return "textOnlyButton";
+      return 'textOnlyButton';
     }
   }
 
@@ -103,7 +103,7 @@ export default function Login(props) {
         />
         <p className="normalText">{language.password}</p>
         <input
-          type="text"
+          type="password"
           className="infoInput"
           value={password}
           onChange={updatePasswordState}

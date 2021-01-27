@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import "../styles.css";
-import { eng } from "../languages/en.js";
-import { fin } from "../languages/fi.js";
+import React, {useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import '../styles.css';
+import {eng} from '../languages/en.js';
+import {fin} from '../languages/fi.js';
 
 export default function Register(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
 
   function getLangFromProp() {
-    if (props.language === "eng") {
+    if (props.language === 'eng') {
       return eng;
-    } else if (props.language === "fin") {
+    } else if (props.language === 'fin') {
       return fin;
     }
   }
 
   function onEngClick() {
-    props.setLanguage("eng");
+    props.setLanguage('eng');
     updateComponentLanguage(eng);
   }
 
   function onFinClick() {
-    props.setLanguage("fin");
+    props.setLanguage('fin');
     updateComponentLanguage(fin);
   }
 
@@ -36,31 +36,31 @@ export default function Register(props) {
       email: email,
     };
 
-    fetch("http://localhost:4000/signup", {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
+    fetch('http://localhost:4000/signup', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(bodyData),
     })
       .then((response) => response.json())
       .then((data) => console.log(data));
 
-    history.push("/");
+    history.push('/');
   }
 
   function engSelected() {
     if (language === eng) {
-      return "textOnlyButtonSelect";
+      return 'textOnlyButtonSelect';
     } else {
-      return "textOnlyButton";
+      return 'textOnlyButton';
     }
   }
 
   function finSelected() {
     if (language === fin) {
-      return "textOnlyButtonSelect";
+      return 'textOnlyButtonSelect';
     } else {
-      return "textOnlyButton";
+      return 'textOnlyButton';
     }
   }
 
@@ -94,16 +94,16 @@ export default function Register(props) {
       <p className="highlightText">{language.registerExplanation}</p>
       <div id="registerInfoWrapper">
         <div className="registerInfoDiv">
-          <p className="normalText">{language.email + "*"}</p>
+          <p className="normalText">{language.email + '*'}</p>
           <input
             type="text"
             className="infoInput"
             value={email}
             onChange={updateEmailState}
           />
-          <p className="normalText">{language.password + "*"}</p>
+          <p className="normalText">{language.password + '*'}</p>
           <input
-            type="text"
+            type="password"
             className="infoInput"
             value={password}
             onChange={updatePasswordState}
