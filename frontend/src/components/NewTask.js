@@ -53,7 +53,7 @@ export default function NewTask(props) {
     <div className="NewTask">
       <p className="pageTitle">{language.newTask}</p>
       <div className="settingsDivider">
-        <p className="normalLeftText">{language.taskName}</p>
+        <p className="normalText">{language.taskName}</p>
         <input
           type="text"
           className="settingInfoInput"
@@ -62,7 +62,7 @@ export default function NewTask(props) {
         />
       </div>
       <div className="newTaskDateDivider">
-        <p className="normalLeftText">{language.taskDate}</p>
+        <p className="normalText">{language.taskDate}</p>
         <DatePicker
           className="newTaskDatePicker"
           selected={startDate}

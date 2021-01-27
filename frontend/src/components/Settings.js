@@ -150,7 +150,7 @@ export default function Settings(props) {
         </div>
       </div>
       <div className="settingsDivider">
-        <p className="normalLeftText">{language.username}</p>
+        <p className="normalText">{language.username}</p>
         <input
           type="text"
           className="settingInfoInput"
@@ -159,14 +159,14 @@ export default function Settings(props) {
         />
       </div>
       <div className="settingsDivider">
-        <p className="normalLeftText">{language.newPassword}</p>
+        <p className="normalText">{language.newPassword}</p>
         <input
           type="password"
           className="settingInfoInput"
           onChange={updateNewPasswordState}
           value={newPw}
         />
-        <p className="normalLeftText">{language.newPwAgain}</p>
+        <p className="normalText">{language.newPwAgain}</p>
         <input
           type="password"
           className="settingInfoInput"
@@ -175,7 +175,7 @@ export default function Settings(props) {
         />
       </div>
       <div className="settingsDivider">
-        <p className="normalLeftText">{language.email}</p>
+        <p className="normalText">{language.email}</p>
         <input
           type="text"
           className="settingInfoInput"
@@ -184,7 +184,7 @@ export default function Settings(props) {
         />
       </div>
       <div className="settingsDivider" id="settingsBottomPadding">
-        <p className="normalLeftText">{language.language}</p>
+        <p className="normalText">{language.language}</p>
         <div className="settingsLanguageDiv">
           <button className={engSelected()} onClick={onEngClick}>
             {language.enLang}
@@ -195,7 +195,7 @@ export default function Settings(props) {
         </div>
       </div>
       <div className="settingsDivider" id="settingsbottomDiv">
-        <p className="normalLeftText">{language.currentPw}</p>
+        <p className="normalText">{language.currentPw}</p>
         <input
           type="password"
           className="settingInfoInput"
