@@ -37,5 +37,6 @@ const fin = {
   removeAllNotifs: 'Poista kaikki nykyiset sähköposti-ilmoitukset',
   removeTask: 'Poista',
   forgottenPw: 'Salasana unohtui',
+  done: 'Tehty',
 };
 export {fin};

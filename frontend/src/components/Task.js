@@ -47,13 +47,16 @@ export default function Post(props) {
 
   return (
     <div className={urgentTaskTest()}>
-      <div className="leftRightDisplayDiv">
+      <div className="leftRightDisplayDiv" id="homeTaskTextSpace">
         <h3 className="listTaskName">{props.title}</h3>
-        <button className={urgentButtonTest()} onClick={removeTask}>
+        <button className={'smallBorderButtonRed'} onClick={removeTask}>
           {props.lang.removeTask}
         </button>
       </div>
-      <h5 className="listTaskDate">{props.date.toLocaleString()}</h5>
+      <div className="leftRightDisplayDiv">
+        <h5 className="listTaskDate">{props.date.toLocaleString()}</h5>
+        <button className={urgentButtonTest()}>{props.lang.done}</button>
+      </div>
     </div>
   );
 }

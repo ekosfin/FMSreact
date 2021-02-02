@@ -37,5 +37,6 @@ const eng = {
   removeAllNotifs: 'Remove all current E-mail notifications',
   removeTask: 'Delete',
   forgottenPw: 'Forgotten password',
+  done: 'Done',
 };
 export {eng};

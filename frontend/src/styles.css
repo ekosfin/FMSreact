@@ -273,7 +273,6 @@
   color: var(--primaryBlue);
   display: inline-block;
   border-radius: 5px;
-  height: 35px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -284,7 +283,16 @@
   color: black;
   display: inline-block;
   border-radius: 5px;
-  height: 35px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.smallBorderButtonRed {
+  background-color: transparent;
+  border: 2px solid red;
+  color: red;
+  display: inline-block;
+  border-radius: 5px;
   font-size: 14px;
   font-weight: bold;
 }
@@ -397,4 +405,9 @@
   max-width: 400px;
   margin: auto;
   margin-top: 5vh;
+  height: 35px;
+}
+
+#homeTaskTextSpace {
+  margin-block-end: 1em;
 }
