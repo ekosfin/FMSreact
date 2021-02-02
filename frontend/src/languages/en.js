@@ -32,7 +32,8 @@ const eng = {
   before: 'Before',
   saveTime: 'Save time',
   currNotifs: 'Current notifications',
-  taskDate: 'Date',
+  taskStartDate: 'Starting date',
+  taskEndDate: 'Ending date',
   removeAllNotifs: 'Remove all current E-mail notifications',
   removeTask: 'Delete',
 };

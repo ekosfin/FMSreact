@@ -12,8 +12,8 @@ export default function NewTask(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
   const [taskName, setTaskName] = useState('');
-  const [taskDate, setTaskDate] = useState('');
   const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   function getLangFromProp() {
     if (props.language === 'eng') {
@@ -45,10 +45,6 @@ export default function NewTask(props) {
     setTaskName(e.target.value);
   }
 
-  function updateTaskDateState(e) {
-    setTaskDate(e.target.value);
-  }
-
   return (
     <div className="NewTask">
       <p className="pageTitle">{language.newTask}</p>
@@ -62,11 +58,20 @@ export default function NewTask(props) {
         />
       </div>
       <div className="newTaskDateDivider">
-        <p className="normalText">{language.taskDate}</p>
+        <p className="normalText">{language.taskStartDate}</p>
         <DatePicker
           className="newTaskDatePicker"
           selected={startDate}
           onChange={(date) => setStartDate(date)}
+          locale="fi"
+          showTimeSelect
+          dateFormat="dd.MM.yyyy HH:mm"
+        />
+        <p className="normalText">{language.taskEndDate}</p>
+        <DatePicker
+          className="newTaskDatePicker"
+          selected={endDate}
+          onChange={(date) => setEndDate(date)}
           locale="fi"
           showTimeSelect
           dateFormat="dd.MM.yyyy HH:mm"

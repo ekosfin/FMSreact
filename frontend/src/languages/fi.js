@@ -32,7 +32,8 @@ const fin = {
   before: 'Ennen',
   saveTime: 'Tallenna aika',
   currNotifs: 'Nykyiset ilmoitukset',
-  taskDate: 'Päivämäärä',
+  taskStartDate: 'Aloitus päivämäärä',
+  taskEndDate: 'Lopetus päivämäärä',
   removeAllNotifs: 'Poista kaikki nykyiset sähköposti-ilmoitukset',
   removeTask: 'Poista',
 };
