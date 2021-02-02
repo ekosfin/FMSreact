@@ -36,5 +36,6 @@ const eng = {
   taskEndDate: 'Ending date',
   removeAllNotifs: 'Remove all current E-mail notifications',
   removeTask: 'Delete',
+  forgottenPw: 'Forgotten password',
 };
 export {eng};

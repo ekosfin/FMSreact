@@ -36,5 +36,6 @@ const fin = {
   taskEndDate: 'Lopetus päivämäärä',
   removeAllNotifs: 'Poista kaikki nykyiset sähköposti-ilmoitukset',
   removeTask: 'Poista',
+  forgottenPw: 'Salasana unohtui',
 };
 export {fin};

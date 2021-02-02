@@ -389,3 +389,12 @@
   margin-top: 0;
   margin-block-end: 1em;
 }
+
+#forgotPw {
+  width: 55%;
+  font-size: 16px;
+  display: block;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 5vh;
+}

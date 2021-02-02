@@ -54,6 +54,8 @@ export default function Login(props) {
     history.push('/register');
   }
 
+  function onForgottenPwClick() {}
+
   function engSelected() {
     if (language === eng) {
       return 'textOnlyButtonSelect';
@@ -119,6 +121,13 @@ export default function Login(props) {
           onClick={onRegisterClick}
         >
           {language.register}
+        </button>
+        <button
+          className="smallBorderButton"
+          id="forgotPw"
+          onClick={onForgottenPwClick}
+        >
+          {language.forgottenPw}
         </button>
       </div>
     </div>
