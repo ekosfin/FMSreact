@@ -21,6 +21,25 @@ export default function Post(props) {
     }
   }
 
+  async function taskDone() {
+    const bodyData = {
+      _id: props.id,
+    };
+
+    const res = await fetch('http://localhost:5000/donetasks', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify(bodyData),
+    });
+    const data = await res.json();
+    if (props.onRemoved) {
+      props.onRemoved();
+    }
+  }
+
   function urgentTaskTest() {
     let currentDate = new Date();
     let taskDate = props.date;
@@ -55,7 +74,9 @@ export default function Post(props) {
       </div>
       <div className="leftRightDisplayDiv">
         <h5 className="listTaskDate">{props.date.toLocaleString()}</h5>
-        <button className={urgentButtonTest()}>{props.lang.done}</button>
+        <button className={urgentButtonTest()} onClick={taskDone}>
+          {props.lang.done}
+        </button>
       </div>
     </div>
   );

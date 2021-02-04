@@ -17,8 +17,7 @@ export default function DoneTasks(props) {
   }, []);
 
   function fetchTasks() {
-    //Change to GetDoneTask when back is ready
-    fetch('http://localhost:5000/gettasks', {
+    fetch('http://localhost:5000/donetasks', {
       method: 'GET',
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
