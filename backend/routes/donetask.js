@@ -23,13 +23,13 @@ router.post("/", body("TaskID").not().isEmpty().escape(), async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-    try {
-        return res.json(await Task.find({ ownerId: req.user._id, done: true }));
-      } catch (error) {
-        console.error(error);
-        return res.sendStatus(400);
-      }
-})
+router.get("/", async (req, res) => {
+  try {
+    return res.json(await Task.find({ ownerId: req.user._id, done: true }));
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(400);
+  }
+});
 
 module.exports = router;
