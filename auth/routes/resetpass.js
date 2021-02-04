@@ -2,16 +2,14 @@ const express = require("express");
 const router = express.Router();
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const { body } = require("express-validator");
 const User = require("../models/userModel");
 const Reset = require("../models/resetModel");
 
 require("dotenv").config();
 
-router.post("/", async (req, res) => {
+router.post("/", body("email").isEmail().normalizeEmail(), async (req, res) => {
   //asks for password reset
-  if (req.body.email === null) {
-    return res.status(400).json({ message: "bad content" });
-  }
   let randURL = crypto.randomBytes(20).toString("hex");
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) {

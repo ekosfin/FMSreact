@@ -4,7 +4,7 @@ const Task = require("../models/taskModel");
 
 router.get("/", async (req, res) => {
   try {
-    return res.json(await Task.find({ ownerId: req.user._id }));
+    return res.json(await Task.find({ ownerId: req.user._id, done: false }));
   } catch (error) {
     console.error(error);
     return res.sendStatus(400);

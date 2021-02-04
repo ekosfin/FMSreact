@@ -40,7 +40,7 @@ router.post(
 
       return res.json({ message: "Added" });
     }
-
+    body("username").escape();
     let newUser = new User({
       username: req.body.username,
       password: req.body.password,
