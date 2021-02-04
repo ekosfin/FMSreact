@@ -11,7 +11,8 @@ registerLocale('fi', fi);
 export default function NewTask(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [taskName, setTaskName] = useState('');
+  const taskTitle = props.taskTitle;
+  const [taskName, setTaskName] = useState(taskTitle);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
@@ -22,6 +23,10 @@ export default function NewTask(props) {
       return fin;
     }
   }
+
+  useEffect(() => {
+    props.setTaskTitle('');
+  }, []);
 
   async function onCreateTaskClick() {
     const bodyData = {

@@ -47,7 +47,7 @@ export default function Post(props) {
 
   return (
     <div className={urgentTaskTest()}>
-      <div className="leftRightDisplayDiv" id="homeTaskTextSpace">
+      <div className="leftRightDisplayDivBottomSpace">
         <h3 className="listTaskName">{props.title}</h3>
         <button className={'smallBorderButtonRed'} onClick={removeTask}>
           {props.lang.removeTask}

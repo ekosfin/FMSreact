@@ -38,5 +38,6 @@ const fin = {
   removeTask: 'Poista',
   forgottenPw: 'Salasana unohtui',
   done: 'Tehty',
+  reUse: 'Ota käyttöön',
 };
 export {fin};

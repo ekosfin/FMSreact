@@ -38,5 +38,6 @@ const eng = {
   removeTask: 'Delete',
   forgottenPw: 'Forgotten password',
   done: 'Done',
+  reUse: 'Reuse',
 };
 export {eng};
