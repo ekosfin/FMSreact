@@ -39,5 +39,6 @@ const fin = {
   forgottenPw: 'Salasana unohtui',
   done: 'Tehty',
   reUse: 'Ota käyttöön',
+  google: 'Kirjaudu google tunnuksilla'
 };
 export {fin};

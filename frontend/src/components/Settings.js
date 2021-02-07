@@ -1,115 +1,105 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import '../styles.css';
-import {eng} from '../languages/en.js';
-import {fin} from '../languages/fi.js';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import "../styles.css";
+import { eng } from "../languages/en.js";
+import { fin } from "../languages/fi.js";
+import { useAuth } from "./contexts/AuthContext";
 
 export default function Settings(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [newPw, setNewPw] = useState('');
-  const [newPwAgain, setNewPwAgain] = useState('');
+  const [email, setEmail] = useState("");
+  const [textPass, setTextPass] = useState("");
+  const [textUsername, setTextUsername] = useState("");
+  const [newPw, setNewPw] = useState("");
+  const [newPwAgain, setNewPwAgain] = useState("");
+  const { currentUser, deleteUser, updatePassword } = useAuth();
 
+  function fetchInfo() {
+    setTextUsername(currentUser.displayName);
+    setEmail(currentUser.email);
+  }
   useEffect(() => {
     fetchInfo();
   }, []);
 
-  function fetchInfo() {
-    fetch('http://localhost:4000/user', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setEmail(data.email);
-        setUsername(data.username);
-      });
-  }
-
   function getLangFromProp() {
-    if (props.language === 'eng') {
+    if (props.language === "eng") {
       return eng;
-    } else if (props.language === 'fin') {
+    } else if (props.language === "fin") {
       return fin;
     }
   }
 
   function engSelected() {
     if (language === eng) {
-      return 'textOnlyButtonSelect';
+      return "textOnlyButtonSelect";
     } else {
-      return 'textOnlyButton';
+      return "textOnlyButton";
     }
   }
 
   function finSelected() {
     if (language === fin) {
-      return 'textOnlyButtonSelect';
+      return "textOnlyButtonSelect";
     } else {
-      return 'textOnlyButton';
+      return "textOnlyButton";
     }
   }
 
   function onTaskTabClick() {
-    history.push('/taskSettings');
+    history.push("/taskSettings");
   }
 
   function onEngClick() {
-    props.setLanguage('eng');
+    props.setLanguage("eng");
     updateComponentLanguage(eng);
   }
 
   function onFinClick() {
-    props.setLanguage('fin');
+    props.setLanguage("fin");
     updateComponentLanguage(fin);
   }
 
-  function onSaveClick() {
+  async function onSaveClick() {
     if (newPw) {
       if (newPw !== newPwAgain) {
-        console.log('New password mismatch');
+        console.log("New password mismatch");
         return;
       }
+      //change password
+      try {
+        await updatePassword(newPw);
+      } catch (error) {
+        console.error(error);
+      }
     }
-
-    const bodyData = {
-      password: password,
-      newpassword: newPw.length === 0 ? null : newPw,
-      newusername: username,
-      newemail: email,
-    };
-
-    fetch('http://localhost:4000/user', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-      body: JSON.stringify(bodyData),
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    //change username
+    if (currentUser.displayName !== textUsername) {
+      try {
+        currentUser.updateProfile({
+          displayName: textUsername,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    //update email
+    if (currentUser.email !== email) {
+      try {
+        currentUser.updateEmail(email);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 
-  function onDeleteUserClick() {
+  async function onDeleteUserClick() {
     //TODO: Alert of some kind to confirm this is wanted
 
-    fetch('http://localhost:4000/user', {
-      method: 'DELETE',
-      headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => console.log(data));
+    await deleteUser();
 
-    history.push('/');
+    history.push("/");
   }
 
   function updateComponentLanguage(e) {
@@ -121,11 +111,11 @@ export default function Settings(props) {
   }
 
   function updatePasswordState(e) {
-    setPassword(e.target.value);
+    setTextPass(e.target.value);
   }
 
   function updateUsernameState(e) {
-    setUsername(e.target.value);
+    setTextUsername(e.target.value);
   }
 
   function updateNewPasswordState(e) {
@@ -143,8 +133,8 @@ export default function Settings(props) {
           {language.settings}
         </p>
         <div className="tabDiv">
-          <button className={'textOnlyButtonSelect'}>{language.userTab}</button>
-          <button className={'textOnlyButton'} onClick={onTaskTabClick}>
+          <button className={"textOnlyButtonSelect"}>{language.userTab}</button>
+          <button className={"textOnlyButton"} onClick={onTaskTabClick}>
             {language.taskTab}
           </button>
         </div>
@@ -154,7 +144,7 @@ export default function Settings(props) {
         <input
           type="text"
           className="settingInfoInput"
-          value={username}
+          value={textUsername}
           onChange={updateUsernameState}
         />
       </div>
@@ -200,7 +190,7 @@ export default function Settings(props) {
           type="password"
           className="settingInfoInput"
           onChange={updatePasswordState}
-          value={password}
+          value={textPass}
         />
         <button
           className="normalButton"

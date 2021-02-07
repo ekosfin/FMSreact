@@ -11,7 +11,7 @@ export default function Post(props) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        Authorization: "Bearer " + localStorage.getItem("@token"),
       },
       body: JSON.stringify(bodyData),
     });
@@ -30,7 +30,7 @@ export default function Post(props) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        Authorization: "Bearer " + localStorage.getItem("@token"),
       },
       body: JSON.stringify(bodyData),
     });

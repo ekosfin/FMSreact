@@ -6,7 +6,7 @@ const TaskSchema = new mongoose.Schema({
     required: true,
   },
   ownerId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required: true,
   },
   date: {

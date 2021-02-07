@@ -1,74 +1,83 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import '../styles.css';
-import {eng} from '../languages/en.js';
-import {fin} from '../languages/fi.js';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import "../styles.css";
+import { eng } from "../languages/en.js";
+import { fin } from "../languages/fi.js";
+import { useAuth } from "./contexts/AuthContext";
+import { useLanguage } from "./contexts/LanguageContext";
 
-export default function Login(props) {
+export default function Login() {
   const history = useHistory();
-  const [language, setComponentLanguage] = useState(() => getLangFromProp());
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const { login, loginPopupGoogle } = useAuth();
+  const { language, updateLanguage } = useLanguage();
+  const [lang, setComponentLanguage] = useState(() => getLangFromProp());
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function getLangFromProp() {
-    if (props.language === 'eng') {
+    if (language === "eng") {
       return eng;
-    } else if (props.language === 'fin') {
+    } else if (language === "fin") {
       return fin;
     }
   }
 
   function onEngClick() {
-    props.setLanguage('eng');
+    updateLanguage("eng");
     updateComponentLanguage(eng);
   }
 
   function onFinClick() {
-    props.setLanguage('fin');
+    updateLanguage("fin");
     updateComponentLanguage(fin);
   }
 
-  function onLoginClick() {
-    const bodyData = {
-      username: username,
-      password: password,
-    };
-    fetch('http://localhost:4000/login', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(bodyData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.message);
-        localStorage.setItem('accessToken', data.accessToken);
-        localStorage.setItem('refreshToken', data.refreshToken);
-        if (data.message === 'Login successful') {
-          history.push('/home');
-        }
-      });
+  async function onLoginClick() {
+    try {
+      setError("");
+      setLoading(true);
+      await login(username, password);
+      history.push("/home");
+    } catch {
+      setError("Failed to login");
+    }
+    setLoading(false);
   }
 
   function onRegisterClick() {
-    history.push('/register');
+    history.push("/register");
   }
 
   function onForgottenPwClick() {}
 
+  async function onGoogleLoginClick() {
+    try {
+      setError("");
+      setLoading(true);
+      await loginPopupGoogle();
+      history.push("/home");
+    } catch (error) {
+      console.error(error);
+      setError("Failed to login");
+    }
+    setLoading(false);
+  }
+
   function engSelected() {
-    if (language === eng) {
-      return 'textOnlyButtonSelect';
+    if (lang === eng) {
+      return "textOnlyButtonSelect";
     } else {
-      return 'textOnlyButton';
+      return "textOnlyButton";
     }
   }
 
   function finSelected() {
-    if (language === fin) {
-      return 'textOnlyButtonSelect';
+    if (lang === fin) {
+      return "textOnlyButtonSelect";
     } else {
-      return 'textOnlyButton';
+      return "textOnlyButton";
     }
   }
 
@@ -88,22 +97,23 @@ export default function Login(props) {
     <div className="Login">
       <div className="languageDiv">
         <button className={engSelected()} onClick={onEngClick}>
-          {language.enLang}
+          {lang.enLang}
         </button>
         <button className={finSelected()} onClick={onFinClick}>
-          {language.fiLang}
+          {lang.fiLang}
         </button>
       </div>
-      <p className="titleText">{language.title}</p>
+      <p className="titleText">{lang.title}</p>
+      {error && <p>{error /* tähän siis tulee error viesti esille */}</p>}
       <div className="loginInfoDiv">
-        <p className="normalText">{language.usEma}</p>
+        <p className="normalText">{lang.usEma}</p>
         <input
           type="text"
           className="infoInput"
           value={username}
           onChange={updateUsernameState}
         />
-        <p className="normalText">{language.password}</p>
+        <p className="normalText">{lang.password}</p>
         <input
           type="password"
           className="infoInput"
@@ -112,22 +122,34 @@ export default function Login(props) {
         />
       </div>
       <div className="loginButtonDiv">
-        <button className="normalButton" onClick={onLoginClick}>
-          {language.login}
+        <button
+          className="normalButton"
+          onClick={onLoginClick}
+          disabled={loading}
+        >
+          {lang.login}
+        </button>
+        <button
+          className="normalButton"
+          id="loginGoogleButton"
+          onClick={onGoogleLoginClick}
+          disabled={loading}
+        >
+          {lang.google}
         </button>
         <button
           className="normalButton"
           id="loginRegisterButton"
           onClick={onRegisterClick}
         >
-          {language.register}
+          {lang.register}
         </button>
         <button
           className="smallBorderButton"
           id="forgotPw"
           onClick={onForgottenPwClick}
         >
-          {language.forgottenPw}
+          {lang.forgottenPw}
         </button>
       </div>
     </div>

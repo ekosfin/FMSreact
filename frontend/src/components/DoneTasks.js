@@ -1,15 +1,15 @@
-import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-import '../styles.css';
-import {eng} from '../languages/en.js';
-import {fin} from '../languages/fi.js';
-import Task from './DoneTask';
-import jwt_decode from 'jwt-decode';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import "../styles.css";
+import { eng } from "../languages/en.js";
+import { fin } from "../languages/fi.js";
+import Task from "./DoneTask";
+import jwt_decode from "jwt-decode";
 
 export default function DoneTasks(props) {
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
   const [tasksList, setTasksList] = useState([]);
-  const user = jwt_decode(localStorage.getItem('accessToken'));
+  const user = jwt_decode(localStorage.getItem("accessToken"));
   const history = useHistory();
 
   useEffect(() => {
@@ -17,28 +17,30 @@ export default function DoneTasks(props) {
   }, []);
 
   function fetchTasks() {
-    fetch('http://localhost:5000/donetasks', {
-      method: 'GET',
+    fetch("http://localhost:5000/donetasks", {
+      method: "GET",
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('accessToken'),
+        Authorization: "Bearer " + localStorage.getItem("@token"),
       },
     })
       .then((res) => res.json())
       .then((data) =>
-        setTasksList(data.map((task) => ({...task, date: new Date(task.date)})))
+        setTasksList(
+          data.map((task) => ({ ...task, date: new Date(task.date) }))
+        )
       );
   }
 
   function getLangFromProp() {
-    if (props.language === 'eng') {
+    if (props.language === "eng") {
       return eng;
-    } else if (props.language === 'fin') {
+    } else if (props.language === "fin") {
       return fin;
     }
   }
 
   function toNewTask() {
-    history.push('/newTask');
+    history.push("/newTask");
   }
 
   function updateTasksState(e) {

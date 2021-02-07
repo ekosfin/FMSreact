@@ -1,16 +1,29 @@
-const jwt = require("jsonwebtoken");
+const firebase = require("./firebase");
 
-// tässä vielä se osa mikä tarkistaa onko oikee tokeni
-module.exports = function (req, res, next) {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
-  if (token == null) return res.sendStatus(401);
+function authMiddleware(request, response, next) {
+  const headerToken = request.headers.authorization;
+  if (!headerToken) {
+    return response.send({ message: "No token provided" }).status(401);
+  }
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    console.log(err);
-    if (err) return res.status(403).json("Token invalid");
-    req.user = user;
-    // nyt on onnisteesti tarkistettu joten voidaan siirtyä eteenpäin
-    next();
-  });
-};
+  if (headerToken && headerToken.split(" ")[0] !== "Bearer") {
+    response.send({ message: "Invalid token" }).status(401);
+  }
+
+  const token = headerToken.split(" ")[1];
+  firebase
+    .auth()
+    .verifyIdToken(token)
+    .then((decodedToken) => {
+      console.log("ollakos taalla uid");
+      console.log(decodedToken.uid);
+      request.user = { _id: decodedToken.uid };
+      next();
+    })
+    .catch((err) => {
+      console.error(err);
+      response.send({ message: "Could not authorize" }).status(403);
+    });
+}
+
+module.exports = authMiddleware;

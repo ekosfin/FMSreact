@@ -39,5 +39,6 @@ const eng = {
   forgottenPw: 'Forgotten password',
   done: 'Done',
   reUse: 'Reuse',
+  google: 'Login with google'
 };
 export {eng};

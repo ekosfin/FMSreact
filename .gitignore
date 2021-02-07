@@ -105,3 +105,5 @@ dist
 
 # Mikko's test files
 *.bat
+
+/backend/serviceAccountKey.json

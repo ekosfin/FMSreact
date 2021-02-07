@@ -1,68 +1,40 @@
-import React, {useState} from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 
-import Register from './components/Register';
-import Login from './components/Login';
-import BottomBar from './components/BottomBar';
-import TopBar from './components/TopBar';
-import Home from './components/Home';
-import Settings from './components/Settings';
-import DoneTasks from './components/DoneTasks';
-import TaskSettings from './components/TaskSettings';
-import NewTask from './components/NewTask';
+import Register from "./components/Register";
+import Login from "./components/Login";
+import DoneRoute from "./components/routes/DoneRoute";
+import HomeRoute from "./components/routes/HomeRoute";
+import SettingsRoute from "./components/routes/SettingsRoute";
+import TaskSettingsRoute from "./components/routes/TaskSettingsRoute";
+import NewTaskRoute from "./components/routes/NewTaskRoute";
+
+import PublicRoute from "./components/routes/PublicRoute";
+import PrivateRoute from "./components/routes/PrivateRoute";
+import { AuthProvider } from "./components/contexts/AuthContext";
+import { LanguageProvider } from "./components/contexts/LanguageContext";
 
 export default function App() {
-  const [language, setLanguage] = useState('eng');
-  const [taskTitle, setTaskTitle] = useState('');
-
-  function updateLanguage(e) {
-    setLanguage(e);
-  }
-
-  function updateTaskTitle(e) {
-    setTaskTitle(e);
-  }
-
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route path="/done">
-            <TopBar language={language} />
-            <DoneTasks language={language} setTaskTitle={updateTaskTitle} />
-            <BottomBar location="done" />
-          </Route>
-          <Route path="/home">
-            <TopBar language={language} />
-            <Home language={language} />
-            <BottomBar location="home" />
-          </Route>
-          <Route path="/register">
-            <Register setLanguage={updateLanguage} language={language} />
-          </Route>
-          <Route path="/settings">
-            <TopBar language={language} />
-            <Settings setLanguage={updateLanguage} language={language} />
-            <BottomBar location="settings" />
-          </Route>
-          <Route path="/taskSettings">
-            <TopBar language={language} />
-            <TaskSettings language={language} />
-            <BottomBar location="settings" />
-          </Route>
-          <Route path="/newTask">
-            <TopBar language={language} />
-            <NewTask
-              language={language}
-              taskTitle={taskTitle}
-              setTaskTitle={updateTaskTitle}
-            />
-            <BottomBar location="none" />
-          </Route>
-          <Route path="/">
-            <Login setLanguage={updateLanguage} language={language} />
-          </Route>
-        </Switch>
+        <LanguageProvider>
+          <AuthProvider>
+            <Switch>
+              <PublicRoute component={Login} path="/" exact />
+              <PublicRoute component={Register} path="/register" exact />
+              <PrivateRoute component={DoneRoute} path="/done" exact />
+              <PrivateRoute component={HomeRoute} path="/home" exact />
+              <PrivateRoute component={SettingsRoute} path="/settings" exact />
+              <PrivateRoute
+                component={TaskSettingsRoute}
+                path="/taskSettings"
+                exact
+              />
+              <PrivateRoute component={NewTaskRoute} path="/newTask" exact />
+            </Switch>
+          </AuthProvider>
+        </LanguageProvider>
       </Router>
     </div>
   );
