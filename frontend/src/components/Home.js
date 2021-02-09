@@ -10,18 +10,14 @@ export default function Home(props) {
   const history = useHistory();
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
   const [tasksList, setTasksList] = useState([]);
-  const { currentUser } = useAuth();
+  const { currentUser, jwtToken } = useAuth();
   const user = currentUser.displayName;
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
   function fetchTasks() {
     fetch("http://localhost:5000/gettasks", {
       method: "GET",
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("@token"),
+        Authorization: "Bearer " + jwtToken,
       },
     })
       .then((res) => res.json())
@@ -31,6 +27,11 @@ export default function Home(props) {
         )
       );
   }
+
+  useEffect(() => {
+    if (jwtToken === "") return;
+    fetchTasks();
+  }, [jwtToken]);
 
   function getLangFromProp() {
     if (props.language === "eng") {

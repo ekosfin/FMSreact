@@ -4,12 +4,10 @@ import "../styles.css";
 import { eng } from "../languages/en.js";
 import { fin } from "../languages/fi.js";
 import Task from "./DoneTask";
-import jwt_decode from "jwt-decode";
 
 export default function DoneTasks(props) {
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
   const [tasksList, setTasksList] = useState([]);
-  const user = jwt_decode(localStorage.getItem("accessToken"));
   const history = useHistory();
 
   useEffect(() => {

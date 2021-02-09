@@ -39,11 +39,23 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(username, password);
-      history.push("/home");
-    } catch {
+    } catch (error) {
+      console.error(error);
       setError("Failed to login");
+      setLoading(false);
     }
-    setLoading(false);
+  }
+
+  async function onGoogleLoginClick() {
+    try {
+      setError("");
+      setLoading(true);
+      await loginPopupGoogle();
+    } catch (error) {
+      console.error(error);
+      setError("Failed to login");
+      setLoading(false);
+    }
   }
 
   function onRegisterClick() {
@@ -51,19 +63,6 @@ export default function Login() {
   }
 
   function onForgottenPwClick() {}
-
-  async function onGoogleLoginClick() {
-    try {
-      setError("");
-      setLoading(true);
-      await loginPopupGoogle();
-      history.push("/home");
-    } catch (error) {
-      console.error(error);
-      setError("Failed to login");
-    }
-    setLoading(false);
-  }
 
   function engSelected() {
     if (lang === eng) {
