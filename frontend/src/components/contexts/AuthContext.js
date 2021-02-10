@@ -27,22 +27,29 @@ export function AuthProvider({ children }) {
   const [updateName, setUpdateName] = useState(false);
   const [jwtToken, setJwtToken] = useState("");
 
-  function signup(email, password, uname) {
-    let createdUser = auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
+  async function signup(email, password, uname) {
+    return new Promise((resolve, reject) => {
+      auth.createUserWithEmailAndPassword(email, password).then((user) => {
         if (user) {
           user.user.updateProfile({
             displayName: uname,
           });
-          setUsername(uname);
-          setUpdateName(true);
+          user.user.getIdToken(true).then(async (token) => {
+            if (token) {
+              setJwtToken(token);
+              asyncLocalStorage
+                .setItem("@token", token)
+                .then(history.push("/home"));
+              resolve();
+            } else {
+              reject("pieleen meni");
+            }
+          });
         }
-      })
-      .catch((e) => {
-        console.log(e);
+        setUsername(uname);
+        setUpdateName(true);
       });
-    return createdUser;
+    });
   }
 
   async function login(email, password) {
