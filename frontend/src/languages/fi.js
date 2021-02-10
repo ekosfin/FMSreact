@@ -39,6 +39,9 @@ const fin = {
   forgottenPw: 'Salasana unohtui',
   done: 'Tehty',
   reUse: 'Ota käyttöön',
-  google: 'Kirjaudu google tunnuksilla'
+  google: 'Kirjaudu google tunnuksilla',
+  sort: 'Järjestä',
+  endingDate: 'Lopetus pvm',
+  byTitle: 'Otsikko',
 };
 export {fin};

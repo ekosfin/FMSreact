@@ -39,6 +39,9 @@ const eng = {
   forgottenPw: 'Forgotten password',
   done: 'Done',
   reUse: 'Reuse',
-  google: 'Login with google'
+  google: 'Login with google',
+  sort: 'Sort',
+  endingDate: 'End date',
+  byTitle: 'Title',
 };
 export {eng};

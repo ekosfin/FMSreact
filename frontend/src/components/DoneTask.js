@@ -16,7 +16,7 @@ export default function doneTask(props) {
           {props.lang.reUse}
         </button>
       </div>
-      <h5 className="listTaskDate">{props.date.toLocaleString()}</h5>
+      <h5 className="listTaskDate">{props.endDate.toLocaleString()}</h5>
     </div>
   );
 }

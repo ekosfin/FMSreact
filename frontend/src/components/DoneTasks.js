@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import "../styles.css";
-import { eng } from "../languages/en.js";
-import { fin } from "../languages/fi.js";
-import Task from "./DoneTask";
+import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import '../styles.css';
+import {eng} from '../languages/en.js';
+import {fin} from '../languages/fi.js';
+import Task from './DoneTask';
 
 export default function DoneTasks(props) {
   const [language, setComponentLanguage] = useState(() => getLangFromProp());
@@ -15,30 +15,28 @@ export default function DoneTasks(props) {
   }, []);
 
   function fetchTasks() {
-    fetch("http://localhost:5000/donetasks", {
-      method: "GET",
+    fetch('http://localhost:5000/donetasks', {
+      method: 'GET',
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("@token"),
+        Authorization: 'Bearer ' + localStorage.getItem('@token'),
       },
     })
       .then((res) => res.json())
       .then((data) =>
-        setTasksList(
-          data.map((task) => ({ ...task, date: new Date(task.date) }))
-        )
+        setTasksList(data.map((task) => ({...task, date: new Date(task.date)})))
       );
   }
 
   function getLangFromProp() {
-    if (props.language === "eng") {
+    if (props.language === 'eng') {
       return eng;
-    } else if (props.language === "fin") {
+    } else if (props.language === 'fin') {
       return fin;
     }
   }
 
   function toNewTask() {
-    history.push("/newTask");
+    history.push('/newTask');
   }
 
   function updateTasksState(e) {
@@ -54,7 +52,7 @@ export default function DoneTasks(props) {
             key={item._id}
             id={item._id}
             title={item.title}
-            date={item.date}
+            endDate={item.date}
             lang={language}
             onRemoved={fetchTasks}
             setTaskTitle={props.setTaskTitle}

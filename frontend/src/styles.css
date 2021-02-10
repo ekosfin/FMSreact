@@ -325,6 +325,10 @@
   text-align: center;
 }
 
+.rightDisplayDiv {
+  text-align: right;
+}
+
 #homeNewTaskButton {
   display: inline-block;
   width: auto;
