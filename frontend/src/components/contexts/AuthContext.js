@@ -1,17 +1,31 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth, firebase } from "../../firebase";
+import { useHistory } from "react-router-dom";
 
 const AuthContext = React.createContext();
+
+const asyncLocalStorage = {
+  setItem: async function (key, value) {
+    await Promise.resolve();
+    localStorage.setItem(key, value);
+  },
+  getItem: async function (key) {
+    await Promise.resolve();
+    return localStorage.getItem(key);
+  },
+};
 
 export function useAuth() {
   return useContext(AuthContext);
 }
 
 export function AuthProvider({ children }) {
+  const history = useHistory();
   const [currentUser, setCurrentUser] = useState();
   const [username, setUsername] = useState();
   const [update, setUpdate] = useState(false);
   const [updateName, setUpdateName] = useState(false);
+  const [jwtToken, setJwtToken] = useState("");
 
   function signup(email, password, uname) {
     let createdUser = auth
@@ -31,21 +45,47 @@ export function AuthProvider({ children }) {
     return createdUser;
   }
 
-  function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+  async function login(email, password) {
+    return new Promise((resolve, reject) => {
+      auth.signInWithEmailAndPassword(email, password).then(() => {
+        auth.currentUser.getIdToken(true).then(async (token) => {
+          if (token) {
+            setJwtToken(token);
+            asyncLocalStorage
+              .setItem("@token", token)
+              .then(history.push("/home"));
+            resolve();
+          } else {
+            reject("pieleen meni");
+          }
+        });
+      });
+    });
   }
 
   async function loginPopupGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    await auth.signInWithPopup(provider).then(async (results) => {
-      const token = await auth?.currentUser?.getIdToken(true);
-      if (token) {
-        localStorage.setItem("@token", token);
-      }
+    return new Promise((resolve, reject) => {
+      auth.signInWithPopup(provider).then(() => {
+        auth.currentUser.getIdToken(true).then(async (token) => {
+          if (token) {
+            setJwtToken(token);
+            asyncLocalStorage
+              .setItem("@token", token)
+              .then(history.push("/home"));
+            resolve();
+          } else {
+            reject("pieleen meni");
+          }
+        });
+      });
+      resolve();
     });
   }
 
   function logout() {
+    setJwtToken("");
+    localStorage.removeItem("@token");
     return auth.signOut();
   }
 
@@ -96,6 +136,7 @@ export function AuthProvider({ children }) {
     setUsername,
     loginPopupGoogle,
     deleteUser,
+    jwtToken,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
