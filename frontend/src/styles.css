@@ -353,6 +353,12 @@
   margin-top: 5vh;
 }
 
+#loginGoogleButton {
+  background-color: var(--lightGray);
+  border: none;
+  margin-top: 5vh;
+}
+
 #registerButton {
   margin-top: 7vh;
 }
